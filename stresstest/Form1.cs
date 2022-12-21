@@ -14,15 +14,19 @@ namespace stresstest
    
     public partial class Form1 : Form
     {
-        String tabell;
+        String tabell,tabell2;
         SqlConnection cnn;
         string connectionString;
         int fran;
         int till;
-
+        String datum;
+      //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
         public Form1()
         {
             InitializeComponent();
+            tabell = "dbo_Analysis Blood";
+            tabell2 = "dbo.[Analysis Blood]";
+            datum = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -152,51 +156,61 @@ namespace stresstest
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Blood";
+            tabell2 = "dbo.[Analysis Blood]";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis DNA";
+            tabell2 = "dbo.[Analysis DNA]";
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Tumor";
+            tabell2 = "dbo.[Analysis Tumor]";
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis FISH";
+            tabell2 = "dbo.[Analysis FISH]";
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Counselling";
+            tabell2 = "dbo.[Analysis Counselling]";
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Referral";
+            tabell2 = "dbo.[Analysis Referral]";
         }
 
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Foetus";
+            tabell2 = "dbo.[Analysis Foetus]";
         }
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Fibroblast";
+            tabell2 = "dbo.[Analysis Fibroblast]";
         }
 
         private void radioButton9_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Amnion";
+            tabell2 = "dbo.[Analysis Amnion]";
         }
 
         private void radioButton10_CheckedChanged(object sender, EventArgs e)
         {
             tabell = "dbo_Analysis Chorion";
+            tabell2 = "dbo.[Analysis Chorion]";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -217,11 +231,11 @@ namespace stresstest
 
             //command.Parameters.Add(new SqlParameter("@tabell", "Analysis Blood"));
             //command.Parameters.Add(new SqlParameter("@analystyp", 1000));
-            String datum;
-            datum = DateTime.Now.ToString("MMMM dd, yyyy");
+          //  String datum;
+          //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
 
             command.Parameters.Add(new SqlParameter("@tabell", tabell));
-            command.Parameters.Add(new SqlParameter("@analystyp", 1));
+            command.Parameters.Add(new SqlParameter("@analystyp", fran));
             command.Parameters.Add(new SqlParameter("@patient", 12171));
             command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
             command.Parameters.Add(new SqlParameter("@SubmitterName", "GB"));
@@ -263,26 +277,68 @@ namespace stresstest
 
             dataReader = command.ExecuteReader();
             dataReader.Close();
-            for (int a = fran; a <= till; a++)
+            for (int a = fran+1; a <= till; a++)
             {
                 // SqlDataReader dataReader2;
                 command.Parameters.RemoveAt(1);
                 //    command.Parameters.Add(new SqlParameter("@analystyp", a));
                 command.Parameters.Insert(1, new SqlParameter("@analystyp", a));
                 dataReader = command.ExecuteReader();
-                if (a < till)
-                    dataReader.Close();
+                //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
+            //    Output = Output + dataReader.GetValue(0);
+                if (a < till) 
+                   dataReader.Close();
             }
             while (dataReader.Read())
             {
                 Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
 
             }
-            MessageBox.Show(Output);
+            MessageBox.Show("Inskrivning klar!");
 
 
-            cnn.Close();
+            //   cnn.Close();
+            dataReader.Close();
+      //      button3.Enabled = true;
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+           // String Sql = "Select count(*) from dbo.[" + tabell + "] where patient=12171 and signature = " + textBox1.Text + "";
+            String Sql = "Select count(*) from " + tabell2 + " where patient=12171 and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+
+
+
+           // SqlCommand command;
+          //  command.CommandText = "SELECT COUNT(*) FROM table_name";
+        //    Int32 count = (Int32)cmd.ExecuteScalar();
+
+
+
+
+            //  SqlCommand command = new SqlCommand("Select count(*) from " + tabell + " where patient=12171 and signature = " + textBox1.Text + "", cnn);
+            SqlCommand command = new SqlCommand(Sql, cnn);
+            //  command.Parameters.AddWithValue("@zip", "india");
+            // int result = command.ExecuteNonQuery();
+            //    using (SqlDataReader reader = command.ExecuteReader())
+        //    using (SqlDataReader reader = command.ExecuteScalar())
+                Int32 Count = (Int32)command.ExecuteScalar();
+            {
+              //  if (reader.Read())
+                {
+                    int bb;
+                    bb = 0;
+                    if(Count == ((till - fran)+1))
+                    {
+                        MessageBox.Show("Verifierat!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Något gick fel!");
+                    }
+                }
+            }
         }
     }
 }
