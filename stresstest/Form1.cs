@@ -302,6 +302,14 @@ namespace stresstest
       //      button3.Enabled = true;
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            String Sql = "Delete  from " + tabell2 + " where patient=12171 and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+            SqlCommand command = new SqlCommand(Sql, cnn);
+            command.ExecuteNonQuery();
+            MessageBox.Show("städat!");
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
 
