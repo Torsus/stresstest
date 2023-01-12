@@ -224,7 +224,7 @@ namespace stresstest
 
             till = Int16.Parse(textBox4.Text);
             String Sql, Output = "";
-            Sql = "sp_insert_enkel";
+            Sql = "sp_insert_enkel2";
             command = new SqlCommand(Sql, cnn);
             command.CommandType = CommandType.StoredProcedure;
 
