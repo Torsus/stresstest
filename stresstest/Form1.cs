@@ -27,6 +27,18 @@ namespace stresstest
             tabell = "dbo_Analysis Blood";
             tabell2 = "dbo.[Analysis Blood]";
             datum = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+
+            String Sql;
+
+            Sql = "Select * from dbo.[Patients]";
+          
+            SqlDataReader reader = Datacontainer.command.ExecuteReader();
+            reader.Read();
+            //   int antal = (int)Datacontainer.command.ExecuteScalar();
+            // antal = (int)Datacontainer.command.ExecuteScalar();
+            Datacontainer.personnummer = (String)reader.GetValue(1);
+            Datacontainer.Familyname = (String)reader.GetValue(2);
+            Datacontainer.fornamn = (String)reader.GetValue(3);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -308,6 +320,16 @@ namespace stresstest
             SqlCommand command = new SqlCommand(Sql, cnn);
             command.ExecuteNonQuery();
             MessageBox.Show("städat!");
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button3_Click(object sender, EventArgs e)
