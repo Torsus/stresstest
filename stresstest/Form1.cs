@@ -91,7 +91,8 @@ namespace stresstest
                 }
              //   comboBox2.DataSource = items;
             }
-            comboBox2.SelectedValue = "1";
+          //   comboBox2.SelectedValue = "1";
+            comboBox2.SelectedIndex = 0;
             comboBox2.Refresh();
             reader.Close();
             // comboBox2.Items.Add(new { Text = Datacontainer.personnummer, Value = Datacontainer.personnummer });
