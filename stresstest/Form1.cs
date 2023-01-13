@@ -93,6 +93,7 @@ namespace stresstest
             }
             comboBox2.SelectedValue = "1";
             comboBox2.Refresh();
+            reader.Close();
             // comboBox2.Items.Add(new { Text = Datacontainer.personnummer, Value = Datacontainer.personnummer });
 
           //  comboBox2.DataSource = items;
@@ -275,18 +276,22 @@ namespace stresstest
             till = Int16.Parse(textBox4.Text);
             String personnummer = comboBox2.SelectedItem.ToString();
 
-
+            String Sql, Output = "";
+            Sql = "sp_insert_enkel2";
+          //  command = new SqlCommand(Sql, cnn);
+           // command.CommandType = CommandType.StoredProcedure;
 
 
             String Sql2;
-            Sql2 = "Select * from dbo.[Patients] where [Personal number] = personnummer";
+            Sql2 = "Select * from dbo.[Patients] where [Personal number] = '" + personnummer + "'";
             Datacontainer.command = new SqlCommand(Sql2, Datacontainer.cnn);
             Datacontainer.command.CommandType = CommandType.Text;
-            SqlDataReader reader = Datacontainer.command.ExecuteReader();
+            SqlDataReader reader2 = Datacontainer.command.ExecuteReader();
+            reader2.Read();
             int personnummerindex;
-            personnummerindex = (int)reader.GetValue(0);
+            personnummerindex = (int)reader2.GetValue(0);
 
-
+            reader2.Close();
 
             //command.Parameters.Add(new SqlParameter("@tabell", "Analysis Blood"));
             //command.Parameters.Add(new SqlParameter("@analystyp", 1000));
@@ -294,7 +299,7 @@ namespace stresstest
             //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
 
 
-            String Sql = "sp_insert_enkel2";
+         //   String Sql = "sp_insert_enkel2";
             command = new SqlCommand(Sql, cnn);
             command.CommandType = CommandType.StoredProcedure;
 
@@ -340,9 +345,11 @@ namespace stresstest
             command.Parameters.Add(new SqlParameter("@CareDate_s", "20121003"));
             command.Parameters.Add(new SqlParameter("@SpecimenType", "xxx"));
 
-
+         //   Sql = "sp_insert_enkel2";
+         //   command = new SqlCommand(Sql, cnn);
+         //   command.CommandType = CommandType.StoredProcedure;
             dataReader = command.ExecuteReader();
-            dataReader.Close();
+       //     dataReader.Close();
             for (int a = fran+1; a <= till; a++)
             {
                 // SqlDataReader dataReader2;
