@@ -372,7 +372,7 @@ namespace stresstest
 
             //   cnn.Close();
             dataReader.Close();
-      //      button3.Enabled = true;
+      ///      button3.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
