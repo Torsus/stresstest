@@ -285,13 +285,20 @@ namespace stresstest
             SqlDataReader reader = Datacontainer.command.ExecuteReader();
             int personnummerindex;
             personnummerindex = (int)reader.GetValue(0);
-           
+
 
 
             //command.Parameters.Add(new SqlParameter("@tabell", "Analysis Blood"));
             //command.Parameters.Add(new SqlParameter("@analystyp", 1000));
-          //  String datum;
-          //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
+            //  String datum;
+            //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
+
+
+            String Sql = "sp_insert_enkel2";
+            command = new SqlCommand(Sql, cnn);
+            command.CommandType = CommandType.StoredProcedure;
+
+
 
             command.Parameters.Add(new SqlParameter("@tabell", tabell));
             command.Parameters.Add(new SqlParameter("@analystyp", fran));
