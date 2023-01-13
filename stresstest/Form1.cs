@@ -28,17 +28,6 @@ namespace stresstest
             tabell2 = "dbo.[Analysis Blood]";
             datum = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
 
-            String Sql;
-
-            Sql = "Select * from dbo.[Patients]";
-          
-            SqlDataReader reader = Datacontainer.command.ExecuteReader();
-            reader.Read();
-            //   int antal = (int)Datacontainer.command.ExecuteScalar();
-            // antal = (int)Datacontainer.command.ExecuteScalar();
-            Datacontainer.personnummer = (String)reader.GetValue(1);
-            Datacontainer.Familyname = (String)reader.GetValue(2);
-            Datacontainer.fornamn = (String)reader.GetValue(3);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,20 +35,69 @@ namespace stresstest
            
             textBox1.Update();
             textBox2.Update();
-          //  textBox3.Update();
-         //   textBox4.Update();
-           
-         //   fran = Int16.Parse(textBox3.Text);
-           
-        //    till = Int16.Parse(textBox4.Text);
+            //  textBox3.Update();
+            //   textBox4.Update();
+
+            //   fran = Int16.Parse(textBox3.Text);
+
+
+
+
+
+
+            //    till = Int16.Parse(textBox4.Text);
             // connectionString = @"Data Source=Klingen-test-su-db,62468;Initial Catalog=Klingen_Test;User ID=tomha5;Password=202211";
-            connectionString = @"Data Source=Klingen-test-su-db,62468;Initial Catalog=Klingen_Test;User ID=" + textBox1.Text + ";Password=" + textBox2.Text +"";
+            Datacontainer.connectionString = @"Data Source=Klingen-test-su-db,62468;Initial Catalog=Klingen_Test;User ID=" + textBox1.Text + ";Password=" + textBox2.Text +"";
             //  connectionString = @"ODBC;DRIVER={SQL Server};UID=tomha5;PWD=202211;server = Klingen-test-su-db,62468;DATABASE = KlinGen_Test";
-            cnn = new SqlConnection(connectionString);
-            cnn.Open();
+            Datacontainer.cnn = new SqlConnection(Datacontainer.connectionString);
+            Datacontainer.cnn.Open();
             MessageBox.Show("Connection Open  !");
 
 
+            /////////////////////////Find patients!//////////////////////////////////////////
+
+            String Sql;
+
+            Sql = "Select * from dbo.[Patients]";
+            Datacontainer.command = new SqlCommand(Sql, Datacontainer.cnn);
+            Datacontainer.command.CommandType = CommandType.Text;
+            SqlDataReader reader = Datacontainer.command.ExecuteReader();
+            //   var items = new[];
+            // var items = new[];
+            int max,varv;
+            max = 100;
+            varv = 1;
+            while (reader.Read()&& varv <= max)
+            {
+                varv++;
+                //   int antal = (int)Datacontainer.command.ExecuteScalar();
+                // antal = (int)Datacontainer.command.ExecuteScalar();
+                if (reader.GetValue(1) != DBNull.Value)
+                {
+                    Datacontainer.personnummer = (String)reader.GetValue(1);
+                    // Datacontainer.Familyname = (String)reader.GetValue(2);
+                    // Datacontainer.fornamn = (String)reader.GetValue(3);
+
+
+                    comboBox2.DisplayMember = "Text";
+                    comboBox2.ValueMember = "Value";
+
+                    var items = new[] {
+                     new { Text = Datacontainer.personnummer, Value = Datacontainer.personnummer }
+                    };
+                    comboBox2.Items.Add(Datacontainer.personnummer);
+                 //   cboON1.Items.Add(dr["Column_name"]);
+                    //   comboBox2.DataSource = items;
+                }
+             //   comboBox2.DataSource = items;
+            }
+            comboBox2.SelectedValue = "1";
+            comboBox2.Refresh();
+            // comboBox2.Items.Add(new { Text = Datacontainer.personnummer, Value = Datacontainer.personnummer });
+
+          //  comboBox2.DataSource = items;
+
+            //comboBox2.Items[1] = Datacontainer.personnummer;
             //////////////////////////////////////////////////////////
 
 
@@ -235,10 +273,19 @@ namespace stresstest
             fran = Int16.Parse(textBox3.Text);
 
             till = Int16.Parse(textBox4.Text);
-            String Sql, Output = "";
-            Sql = "sp_insert_enkel2";
-            command = new SqlCommand(Sql, cnn);
-            command.CommandType = CommandType.StoredProcedure;
+            String personnummer = comboBox2.SelectedItem.ToString();
+
+
+
+
+            String Sql2;
+            Sql2 = "Select * from dbo.[Patients] where [Personal number] = personnummer";
+            Datacontainer.command = new SqlCommand(Sql2, Datacontainer.cnn);
+            Datacontainer.command.CommandType = CommandType.Text;
+            SqlDataReader reader = Datacontainer.command.ExecuteReader();
+            int personnummerindex;
+            personnummerindex = (int)reader.GetValue(0);
+           
 
 
             //command.Parameters.Add(new SqlParameter("@tabell", "Analysis Blood"));
@@ -248,7 +295,7 @@ namespace stresstest
 
             command.Parameters.Add(new SqlParameter("@tabell", tabell));
             command.Parameters.Add(new SqlParameter("@analystyp", fran));
-            command.Parameters.Add(new SqlParameter("@patient", 12171));
+            command.Parameters.Add(new SqlParameter("@patient", personnummerindex));
             command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
             command.Parameters.Add(new SqlParameter("@SubmitterName", "GB"));
             command.Parameters.Add(new SqlParameter("@Submitter", "xx"));

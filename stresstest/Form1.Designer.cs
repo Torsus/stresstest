@@ -292,18 +292,20 @@ namespace stresstest
             // 
             // comboBox1
             // 
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 0);
+            this.comboBox1.Location = new System.Drawing.Point(239, 11);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 23;
+            this.comboBox1.Visible = false;
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(290, 313);
+            this.comboBox2.Location = new System.Drawing.Point(266, 313);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.Size = new System.Drawing.Size(145, 24);
             this.comboBox2.TabIndex = 24;
             // 
             // label6
