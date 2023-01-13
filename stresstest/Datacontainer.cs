@@ -21,6 +21,7 @@ namespace stresstest
         public static string personnummer;
         public static string Familyname;
         public static string fornamn;
+        public static int personnummerindex;
         //  public Form1 f1 = new Form1();
         // public Form2 f2 = new Form2();
     }

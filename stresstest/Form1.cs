@@ -288,8 +288,8 @@ namespace stresstest
             Datacontainer.command.CommandType = CommandType.Text;
             SqlDataReader reader2 = Datacontainer.command.ExecuteReader();
             reader2.Read();
-            int personnummerindex;
-            personnummerindex = (int)reader2.GetValue(0);
+           // int personnummerindex;
+            Datacontainer.personnummerindex = (int)reader2.GetValue(0);
 
             reader2.Close();
 
@@ -300,14 +300,14 @@ namespace stresstest
 
 
          //   String Sql = "sp_insert_enkel2";
-            command = new SqlCommand(Sql, cnn);
+            command = new SqlCommand(Sql, Datacontainer.cnn);
             command.CommandType = CommandType.StoredProcedure;
 
 
 
             command.Parameters.Add(new SqlParameter("@tabell", tabell));
             command.Parameters.Add(new SqlParameter("@analystyp", fran));
-            command.Parameters.Add(new SqlParameter("@patient", personnummerindex));
+            command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
             command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
             command.Parameters.Add(new SqlParameter("@SubmitterName", "GB"));
             command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
@@ -349,7 +349,7 @@ namespace stresstest
          //   command = new SqlCommand(Sql, cnn);
          //   command.CommandType = CommandType.StoredProcedure;
             dataReader = command.ExecuteReader();
-       //     dataReader.Close();
+            dataReader.Close();
             for (int a = fran+1; a <= till; a++)
             {
                 // SqlDataReader dataReader2;
@@ -377,8 +377,8 @@ namespace stresstest
 
         private void button4_Click(object sender, EventArgs e)
         {
-            String Sql = "Delete  from " + tabell2 + " where patient=12171 and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
-            SqlCommand command = new SqlCommand(Sql, cnn);
+            String Sql = "Delete  from " + tabell2 + " where patient='" + Datacontainer.personnummerindex +"' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+            SqlCommand command = new SqlCommand(Sql, Datacontainer.cnn);
             command.ExecuteNonQuery();
             MessageBox.Show("städat!");
         }
@@ -397,7 +397,7 @@ namespace stresstest
         {
 
            // String Sql = "Select count(*) from dbo.[" + tabell + "] where patient=12171 and signature = " + textBox1.Text + "";
-            String Sql = "Select count(*) from " + tabell2 + " where patient=12171 and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+            String Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
 
 
 
@@ -409,7 +409,7 @@ namespace stresstest
 
 
             //  SqlCommand command = new SqlCommand("Select count(*) from " + tabell + " where patient=12171 and signature = " + textBox1.Text + "", cnn);
-            SqlCommand command = new SqlCommand(Sql, cnn);
+            SqlCommand command = new SqlCommand(Sql, Datacontainer.cnn);
             //  command.Parameters.AddWithValue("@zip", "india");
             // int result = command.ExecuteNonQuery();
             //    using (SqlDataReader reader = command.ExecuteReader())
