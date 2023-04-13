@@ -376,8 +376,8 @@ namespace stresstest
             }
             else
             {
-                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis number],[Analysis Template],Address,[Answered Date],Question,Answer,Signature,Background,Analysis,Summary,Footer,[Answered Type],[Answered Sub Type],[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
-                Sql += "VALUES(@Patient,@type,@Analysnumber,@Analysis_template,@Address,@Answered_Date,@Question,@Answer,@Signature,@Background,Analysis,@Summary,@Footer,@Answered_type,@Answered_sub_type,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
+                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis number],[Analysis Template],Address,[Answered Date],Question,Answer,Signature,Background,Analysis,Summary,Footer,[Answered Type],[Answered Sub Type])";
+                Sql += "VALUES(@Patient,@type,@Analysnumber,@Analysis_template,@Address,@Answered_Date,@Question,@Answer,@Signature,@Background,Analysis,@Summary,@Footer,@Answered_type,@Answered_sub_type)";
                 command = new SqlCommand(Sql, Datacontainer.cnn);
                 command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
                 command.Parameters.Add(new SqlParameter("@type", fran));
@@ -394,41 +394,8 @@ namespace stresstest
                 command.Parameters.Add(new SqlParameter("@Footer", "test5"));
                 command.Parameters.Add(new SqlParameter("@Answered_type", "test6"));
                 command.Parameters.Add(new SqlParameter("@Answered_sub_type", "test7"));
-                command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
-                command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
-                command.Parameters.Add(new SqlParameter("@Type", 1));
-                command.Parameters.Add(new SqlParameter("@Urgent", 1));
-                command.Parameters.Add(new SqlParameter("@Arrived_date", "20121001"));
-                command.Parameters.Add(new SqlParameter("@Invoice_Date", "20121002"));
-                command.Parameters.Add(new SqlParameter("@Indication", 1));
-                command.Parameters.Add(new SqlParameter("@Research", 1));
-                command.Parameters.Add(new SqlParameter("@Saved_material", 1));
-                command.Parameters.Add(new SqlParameter("@Canister", "xxx"));
-                command.Parameters.Add(new SqlParameter("@Box", "fg"));
-                command.Parameters.Add(new SqlParameter("@Number", "123"));
-                command.Parameters.Add(new SqlParameter("@Remark", "yyyy"));
-                command.Parameters.Add(new SqlParameter("@Orderer_Internal", 1));
-                command.Parameters.Add(new SqlParameter("@Orderer", 1));
-                command.Parameters.Add(new SqlParameter("@Accountable_Internal", 1));
-                command.Parameters.Add(new SqlParameter("@Accountable", 1));
-                command.Parameters.Add(new SqlParameter("@Result", 7));
-                command.Parameters.Add(new SqlParameter("@Quality", 8));
-                command.Parameters.Add(new SqlParameter("@Diagnosis", "fel"));
-                command.Parameters.Add(new SqlParameter("@McKusick", "12"));
-                command.Parameters.Add(new SqlParameter("@Answered", 1));
-                command.Parameters.Add(new SqlParameter("@Price", "1000"));
-                command.Parameters.Add(new SqlParameter("@Answered_Date", datum));
-                command.Parameters.Add(new SqlParameter("@Invoice_Nr", 10));
-                command.Parameters.Add(new SqlParameter("@Doctor", 11));
-                command.Parameters.Add(new SqlParameter("@Metaphases", "yyy"));
-                command.Parameters.Add(new SqlParameter("@Locked", 1));
-                command.Parameters.Add(new SqlParameter("@Change", "zzz"));
-                command.Parameters.Add(new SqlParameter("@Result_Internal", "tt"));
-                command.Parameters.Add(new SqlParameter("@Prenatal", 1));
-                command.Parameters.Add(new SqlParameter("@Result_Internal_2", 100));
-                command.Parameters.Add(new SqlParameter("@Family", 200));
-                command.Parameters.Add(new SqlParameter("@Care_Date", "20121003"));
-                command.Parameters.Add(new SqlParameter("@Specimen_Type", "xxx"));
+               
+               
 
                 //   Sql = "sp_insert_enkel2";
                 //   command = new SqlCommand(Sql, cnn);
