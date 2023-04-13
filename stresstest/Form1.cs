@@ -300,79 +300,150 @@ namespace stresstest
             //  datum = DateTime.Now.ToString("MMMM dd, yyyy");
 
 
-         // //  String Sql = "sp_insert_enkel2";
-           
+            // //  String Sql = "sp_insert_enkel2";
+
             //    command.CommandType = CommandType.StoredProcedure;
             //command.CommandType = CommandType.TableDirect;
-            Sql = "INSERT INTO " + tabell2 + " (Analysistype,Patient,Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
-            Sql+= "VALUES(@Analysistype,@Patient,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
-            command = new SqlCommand(Sql, Datacontainer.cnn);
-            command.Parameters.Add(new SqlParameter("@Analysistype", fran));
-            command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
-            command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
-            command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
-            command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
-            command.Parameters.Add(new SqlParameter("@Type", 1));
-            command.Parameters.Add(new SqlParameter("@Urgent", 1));
-            command.Parameters.Add(new SqlParameter("@Arrived_date", "20121001"));
-            command.Parameters.Add(new SqlParameter("@Invoice_Date", "20121002"));
-            command.Parameters.Add(new SqlParameter("@Indication", 1));
-            command.Parameters.Add(new SqlParameter("@Research", 1));
-            command.Parameters.Add(new SqlParameter("@Saved_material", 1));
-            command.Parameters.Add(new SqlParameter("@Canister", "xxx"));
-            command.Parameters.Add(new SqlParameter("@Box", "fg"));
-            command.Parameters.Add(new SqlParameter("@Number", "123"));
-            command.Parameters.Add(new SqlParameter("@Remark", "yyyy"));
-            command.Parameters.Add(new SqlParameter("@Orderer_Internal", 1));
-            command.Parameters.Add(new SqlParameter("@Orderer", 1));
-            command.Parameters.Add(new SqlParameter("@Accountable_Internal", 1));
-            command.Parameters.Add(new SqlParameter("@Accountable", 1));
-            command.Parameters.Add(new SqlParameter("@Result", 7));
-            command.Parameters.Add(new SqlParameter("@Quality", 8));
-            command.Parameters.Add(new SqlParameter("@Diagnosis", "fel"));
-            command.Parameters.Add(new SqlParameter("@McKusick", "12"));
-            command.Parameters.Add(new SqlParameter("@Answered", 1));
-            command.Parameters.Add(new SqlParameter("@Price", "1000"));
-            command.Parameters.Add(new SqlParameter("@Answered_Date", datum));
-            command.Parameters.Add(new SqlParameter("@Invoice_Nr", 10));
-            command.Parameters.Add(new SqlParameter("@Doctor", 11));
-            command.Parameters.Add(new SqlParameter("@Metaphases", "yyy"));
-            command.Parameters.Add(new SqlParameter("@Locked", 1));
-            command.Parameters.Add(new SqlParameter("@Change", "zzz"));
-            command.Parameters.Add(new SqlParameter("@Result_Internal", "tt"));
-            command.Parameters.Add(new SqlParameter("@Prenatal", 1));
-            command.Parameters.Add(new SqlParameter("@Result_Internal_2", 100));
-            command.Parameters.Add(new SqlParameter("@Family", 200));
-            command.Parameters.Add(new SqlParameter("@Care_Date", "20121003"));
-            command.Parameters.Add(new SqlParameter("@Specimen_Type", "xxx"));
-
-            //   Sql = "sp_insert_enkel2";
-            //   command = new SqlCommand(Sql, cnn);
-            //   command.CommandType = CommandType.StoredProcedure;
-            //dataReader = command.ExecuteReader();
-            command.ExecuteNonQuery();
-            //dataReader.Close();
-            for (int a = fran+1; a <= till; a++)
+            if (tabell2 != "dbo.[Analysis Answer]")
             {
-                // SqlDataReader dataReader2;
-                command.Parameters.RemoveAt(0);
-                //    command.Parameters.Add(new SqlParameter("@analystyp", a));
-                command.Parameters.Insert(0, new SqlParameter("@Analysistype", a));
-                //  dataReader = command.ExecuteReader();
+                Sql = "INSERT INTO " + tabell2 + " (Analysistype,Patient,Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
+                Sql += "VALUES(@Analysistype,@Patient,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
+                command = new SqlCommand(Sql, Datacontainer.cnn);
+                command.Parameters.Add(new SqlParameter("@Analysistype", fran));
+                command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
+                command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
+                command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
+                command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
+                command.Parameters.Add(new SqlParameter("@Type", 1));
+                command.Parameters.Add(new SqlParameter("@Urgent", 1));
+                command.Parameters.Add(new SqlParameter("@Arrived_date", "20121001"));
+                command.Parameters.Add(new SqlParameter("@Invoice_Date", "20121002"));
+                command.Parameters.Add(new SqlParameter("@Indication", 1));
+                command.Parameters.Add(new SqlParameter("@Research", 1));
+                command.Parameters.Add(new SqlParameter("@Saved_material", 1));
+                command.Parameters.Add(new SqlParameter("@Canister", "xxx"));
+                command.Parameters.Add(new SqlParameter("@Box", "fg"));
+                command.Parameters.Add(new SqlParameter("@Number", "123"));
+                command.Parameters.Add(new SqlParameter("@Remark", "yyyy"));
+                command.Parameters.Add(new SqlParameter("@Orderer_Internal", 1));
+                command.Parameters.Add(new SqlParameter("@Orderer", 1));
+                command.Parameters.Add(new SqlParameter("@Accountable_Internal", 1));
+                command.Parameters.Add(new SqlParameter("@Accountable", 1));
+                command.Parameters.Add(new SqlParameter("@Result", 7));
+                command.Parameters.Add(new SqlParameter("@Quality", 8));
+                command.Parameters.Add(new SqlParameter("@Diagnosis", "fel"));
+                command.Parameters.Add(new SqlParameter("@McKusick", "12"));
+                command.Parameters.Add(new SqlParameter("@Answered", 1));
+                command.Parameters.Add(new SqlParameter("@Price", "1000"));
+                command.Parameters.Add(new SqlParameter("@Answered_Date", datum));
+                command.Parameters.Add(new SqlParameter("@Invoice_Nr", 10));
+                command.Parameters.Add(new SqlParameter("@Doctor", 11));
+                command.Parameters.Add(new SqlParameter("@Metaphases", "yyy"));
+                command.Parameters.Add(new SqlParameter("@Locked", 1));
+                command.Parameters.Add(new SqlParameter("@Change", "zzz"));
+                command.Parameters.Add(new SqlParameter("@Result_Internal", "tt"));
+                command.Parameters.Add(new SqlParameter("@Prenatal", 1));
+                command.Parameters.Add(new SqlParameter("@Result_Internal_2", 100));
+                command.Parameters.Add(new SqlParameter("@Family", 200));
+                command.Parameters.Add(new SqlParameter("@Care_Date", "20121003"));
+                command.Parameters.Add(new SqlParameter("@Specimen_Type", "xxx"));
+
+                //   Sql = "sp_insert_enkel2";
+                //   command = new SqlCommand(Sql, cnn);
+                //   command.CommandType = CommandType.StoredProcedure;
+                //dataReader = command.ExecuteReader();
                 command.ExecuteNonQuery();
+                //dataReader.Close();
+                for (int a = fran + 1; a <= till; a++)
+                {
+                    // SqlDataReader dataReader2;
+                    command.Parameters.RemoveAt(0);
+                    //    command.Parameters.Add(new SqlParameter("@analystyp", a));
+                    command.Parameters.Insert(0, new SqlParameter("@Analysistype", a));
+                    //  dataReader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
+                    //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
+                    //    Output = Output + dataReader.GetValue(0);
+                    //  if (a < till) 
+                    //  dataReader.Close();
+                }
+                //while (dataReader.Read())
+                //{
                 //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
-            //    Output = Output + dataReader.GetValue(0);
-              //  if (a < till) 
-                 //  dataReader.Close();
+
+                //}
+                MessageBox.Show("Inskrivning klar!");
             }
-            //while (dataReader.Read())
-            //{
-            //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
+            else
+            {
+                Sql = "INSERT INTO " + tabell2 + " (type,Patient,Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
+                Sql += "VALUES(@type,@Patient,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
+                command = new SqlCommand(Sql, Datacontainer.cnn);
+                command.Parameters.Add(new SqlParameter("@type", fran));
+                command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
+                command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
+                command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
+                command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
+                command.Parameters.Add(new SqlParameter("@Type", 1));
+                command.Parameters.Add(new SqlParameter("@Urgent", 1));
+                command.Parameters.Add(new SqlParameter("@Arrived_date", "20121001"));
+                command.Parameters.Add(new SqlParameter("@Invoice_Date", "20121002"));
+                command.Parameters.Add(new SqlParameter("@Indication", 1));
+                command.Parameters.Add(new SqlParameter("@Research", 1));
+                command.Parameters.Add(new SqlParameter("@Saved_material", 1));
+                command.Parameters.Add(new SqlParameter("@Canister", "xxx"));
+                command.Parameters.Add(new SqlParameter("@Box", "fg"));
+                command.Parameters.Add(new SqlParameter("@Number", "123"));
+                command.Parameters.Add(new SqlParameter("@Remark", "yyyy"));
+                command.Parameters.Add(new SqlParameter("@Orderer_Internal", 1));
+                command.Parameters.Add(new SqlParameter("@Orderer", 1));
+                command.Parameters.Add(new SqlParameter("@Accountable_Internal", 1));
+                command.Parameters.Add(new SqlParameter("@Accountable", 1));
+                command.Parameters.Add(new SqlParameter("@Result", 7));
+                command.Parameters.Add(new SqlParameter("@Quality", 8));
+                command.Parameters.Add(new SqlParameter("@Diagnosis", "fel"));
+                command.Parameters.Add(new SqlParameter("@McKusick", "12"));
+                command.Parameters.Add(new SqlParameter("@Answered", 1));
+                command.Parameters.Add(new SqlParameter("@Price", "1000"));
+                command.Parameters.Add(new SqlParameter("@Answered_Date", datum));
+                command.Parameters.Add(new SqlParameter("@Invoice_Nr", 10));
+                command.Parameters.Add(new SqlParameter("@Doctor", 11));
+                command.Parameters.Add(new SqlParameter("@Metaphases", "yyy"));
+                command.Parameters.Add(new SqlParameter("@Locked", 1));
+                command.Parameters.Add(new SqlParameter("@Change", "zzz"));
+                command.Parameters.Add(new SqlParameter("@Result_Internal", "tt"));
+                command.Parameters.Add(new SqlParameter("@Prenatal", 1));
+                command.Parameters.Add(new SqlParameter("@Result_Internal_2", 100));
+                command.Parameters.Add(new SqlParameter("@Family", 200));
+                command.Parameters.Add(new SqlParameter("@Care_Date", "20121003"));
+                command.Parameters.Add(new SqlParameter("@Specimen_Type", "xxx"));
 
-            //}
-            MessageBox.Show("Inskrivning klar!");
+                //   Sql = "sp_insert_enkel2";
+                //   command = new SqlCommand(Sql, cnn);
+                //   command.CommandType = CommandType.StoredProcedure;
+                //dataReader = command.ExecuteReader();
+                command.ExecuteNonQuery();
+                //dataReader.Close();
+                for (int a = fran + 1; a <= till; a++)
+                {
+                    // SqlDataReader dataReader2;
+                    command.Parameters.RemoveAt(0);
+                    //    command.Parameters.Add(new SqlParameter("@analystyp", a));
+                    command.Parameters.Insert(0, new SqlParameter("@type", a));
+                    //  dataReader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
+                    //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
+                    //    Output = Output + dataReader.GetValue(0);
+                    //  if (a < till) 
+                    //  dataReader.Close();
+                }
+                //while (dataReader.Read())
+                //{
+                //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
 
-
+                //}
+                MessageBox.Show("Inskrivning klar!");
+            }
             //   cnn.Close();
             //dataReader.Close();
       ///      button3.Enabled = true;
@@ -398,8 +469,8 @@ namespace stresstest
 
         private void radioButton11_CheckedChanged(object sender, EventArgs e)
         {
-          //  tabell = "dbo_Analysis Fibroblast";
-           // tabell2 = "dbo.[Analysis Fibroblast]";
+            tabell = "dbo_Analysis Answer";
+            tabell2 = "dbo.[Analysis Answer]";
         }
 
         private void button3_Click(object sender, EventArgs e)
