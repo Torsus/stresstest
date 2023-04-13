@@ -376,7 +376,7 @@ namespace stresstest
             }
             else
             {
-                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis Number],[Analysis Template],Address,AnswerDate,Question,Answer,Signature,Background,Analysis,Summary,Footer,[Answered Type],[Answered Sub Type])";
+                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis Number],[Analysis Template],Address,AnswerDate,Question,Answer,Signature,Background,Analysis,Summary,Footer,[Answer Type],[Answer Sub Type])";
                 Sql += "VALUES(@Patient,@type,@Analysnumber,@Analysis_template,@Address,@Answered_Date,@Question,@Answer,@Signature,@Background,@Analysis,@Summary,@Footer,@Answered_type,@Answered_sub_type)";
                 command = new SqlCommand(Sql, Datacontainer.cnn);
                 command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
