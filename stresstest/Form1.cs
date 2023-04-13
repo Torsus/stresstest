@@ -376,11 +376,12 @@ namespace stresstest
             }
             else
             {
-                Sql = "INSERT INTO " + tabell2 + " (type,Patient,Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
-                Sql += "VALUES(@type,@Patient,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
+                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis number],Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
+                Sql += "VALUES(@Patient,@type,@Analysnumber,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
                 command = new SqlCommand(Sql, Datacontainer.cnn);
-                command.Parameters.Add(new SqlParameter("@type", fran));
                 command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
+                command.Parameters.Add(new SqlParameter("@type", fran));
+                command.Parameters.Add(new SqlParameter("@Analysnuber", fran));
                 command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
                 command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
                 command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
@@ -427,9 +428,11 @@ namespace stresstest
                 for (int a = fran + 1; a <= till; a++)
                 {
                     // SqlDataReader dataReader2;
-                    command.Parameters.RemoveAt(0);
+                  //  command.Parameters.RemoveAt(1);
                     //    command.Parameters.Add(new SqlParameter("@analystyp", a));
-                    command.Parameters.Insert(0, new SqlParameter("@type", a));
+                  //  command.Parameters.Insert(1, new SqlParameter("@type", a));
+                    command.Parameters.RemoveAt(2);
+                    command.Parameters.Insert(2, new SqlParameter("@Analysnumber", a));
                     //  dataReader = command.ExecuteReader();
                     command.ExecuteNonQuery();
                     //    Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1);
