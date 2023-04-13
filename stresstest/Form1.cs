@@ -396,6 +396,12 @@ namespace stresstest
 
         }
 
+        private void radioButton11_CheckedChanged(object sender, EventArgs e)
+        {
+          //  tabell = "dbo_Analysis Fibroblast";
+           // tabell2 = "dbo.[Analysis Fibroblast]";
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
 
