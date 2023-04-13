@@ -392,8 +392,8 @@ namespace stresstest
                 command.Parameters.Add(new SqlParameter("@Analysis", "test3"));
                 command.Parameters.Add(new SqlParameter("@Summary", "test4"));
                 command.Parameters.Add(new SqlParameter("@Footer", "test5"));
-                command.Parameters.Add(new SqlParameter("@Answered_type", "test6"));
-                command.Parameters.Add(new SqlParameter("@Answered_sub_type", "test7"));
+                command.Parameters.Add(new SqlParameter("@Answered_type", 2));
+                command.Parameters.Add(new SqlParameter("@Answered_sub_type", 3));
                
                
 
