@@ -376,14 +376,15 @@ namespace stresstest
             }
             else
             {
-                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis number],[Analysis Template],Address,Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Answered Date],[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
-                Sql += "VALUES(@Patient,@type,@Analysnumber,@Analysis_template,@Address,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Answered_Date,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
+                Sql = "INSERT INTO " + tabell2 + " (Patient,type,[Analysis number],[Analysis Template],Address,[Answered Date],Signature,[Submitter Name],Submitter,Type,Urgent,[Arrived date],[Invoice Date],Indication,Research,[Saved material],Canister,Box,Number,Remark,[Orderer Internal],Orderer,[Accountable Internal],Accountable,Result,Quality,Diagnosis,McKusick,Answered,Price,[Invoice Nr],Doctor,Metaphases,Locked,Change,[Result Internal],Prenatal,[Result Internal 2],Family,[Care Date],[Specimen Type])";
+                Sql += "VALUES(@Patient,@type,@Analysnumber,@Analysis_template,@Address,@Answered_Date,@Signature,@Submitter_Name,@Submitter,@Type,@Urgent,@Arrived_date,@Invoice_Date,@Indication,@Research,@Saved_material,@Canister,@Box,@Number,@Remark,@Orderer_Internal,@Orderer,@Accountable_Internal,@Accountable,@Result,@Quality,@Diagnosis,@McKusick,@Answered,@Price,@Invoice_Nr,@Doctor,@Metaphases,@Locked,@Change,@Result_Internal,@Prenatal,@Result_Internal_2,@Family,@Care_Date,@Specimen_Type)";
                 command = new SqlCommand(Sql, Datacontainer.cnn);
                 command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
                 command.Parameters.Add(new SqlParameter("@type", fran));
                 command.Parameters.Add(new SqlParameter("@Analysnuber", fran));
                 command.Parameters.Add(new SqlParameter("@Analysis_template", 1));
                 command.Parameters.Add(new SqlParameter("@Address", 1));
+                command.Parameters.Add(new SqlParameter("@Answered_Date", 1));
                 command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
                 command.Parameters.Add(new SqlParameter("@Submitter_Name", "GB"));
                 command.Parameters.Add(new SqlParameter("@Submitter", "xx"));
