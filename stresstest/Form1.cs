@@ -381,7 +381,7 @@ namespace stresstest
                 command = new SqlCommand(Sql, Datacontainer.cnn);
                 command.Parameters.Add(new SqlParameter("@patient", Datacontainer.personnummerindex));
                 command.Parameters.Add(new SqlParameter("@type", fran));
-                command.Parameters.Add(new SqlParameter("@Analysnuber", fran));
+                command.Parameters.Add(new SqlParameter("@Analysnumber", fran));
                 command.Parameters.Add(new SqlParameter("@Analysis_template", 1));
                 command.Parameters.Add(new SqlParameter("@Address", 1));
                 command.Parameters.Add(new SqlParameter("@Answered_Date", 1));
