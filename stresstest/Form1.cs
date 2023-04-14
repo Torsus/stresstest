@@ -464,7 +464,7 @@ namespace stresstest
             }
             else
             {
-                Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and AnswerDate = '" + datum + "'";
+                Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and AnswerDate = '" + datum + "'";
             }
 
 
