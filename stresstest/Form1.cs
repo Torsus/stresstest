@@ -384,7 +384,7 @@ namespace stresstest
                 command.Parameters.Add(new SqlParameter("@Analysnumber", fran));
                 command.Parameters.Add(new SqlParameter("@Analysis_template", 1));
                 command.Parameters.Add(new SqlParameter("@Address", 1));
-                command.Parameters.Add(new SqlParameter("@Answered_Date", 1));
+                command.Parameters.Add(new SqlParameter("@Answered_Date", datum));
                 command.Parameters.Add(new SqlParameter("@Question", "test"));
                 command.Parameters.Add(new SqlParameter("@Answer", "testing"));
                 command.Parameters.Add(new SqlParameter("@Signature", textBox1.Text));
@@ -456,10 +456,16 @@ namespace stresstest
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-           // String Sql = "Select count(*) from dbo.[" + tabell + "] where patient=12171 and signature = " + textBox1.Text + "";
-            String Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
-
+            String Sql;
+            // String Sql = "Select count(*) from dbo.[" + tabell + "] where patient=12171 and signature = " + textBox1.Text + "";
+            if (tabell2 != "dbo.[Analysis Answer]")
+            {
+                Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+            }
+            else
+            {
+                Sql = "Select count(*) from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and AnswerDate = '" + datum + "'";
+            }
 
 
            // SqlCommand command;
