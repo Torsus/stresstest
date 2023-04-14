@@ -432,10 +432,21 @@ namespace stresstest
 
         private void button4_Click(object sender, EventArgs e)
         {
-            String Sql = "Delete  from " + tabell2 + " where patient='" + Datacontainer.personnummerindex +"' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
-            SqlCommand command = new SqlCommand(Sql, Datacontainer.cnn);
-            command.ExecuteNonQuery();
-            MessageBox.Show("städat!");
+            String Sql;
+            if (tabell2 != "dbo.[Analysis Answer]")
+            {
+                Sql = "Delete  from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and signature = '" + textBox1.Text + "'" + " and [Answered Date] = '" + datum + "'";
+                SqlCommand command = new SqlCommand(Sql, Datacontainer.cnn);
+                command.ExecuteNonQuery();
+                MessageBox.Show("städat!");
+            }
+            else
+            {
+                Sql = "Delete  from " + tabell2 + " where patient='" + Datacontainer.personnummerindex + "' and AnswerDate = '" + datum + "'";
+                SqlCommand command = new SqlCommand(Sql, Datacontainer.cnn);
+                command.ExecuteNonQuery();
+                MessageBox.Show("städat!");
+            }
         }
 
         private void label3_Click(object sender, EventArgs e)
